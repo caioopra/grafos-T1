@@ -1,3 +1,4 @@
+from Aresta import Aresta
 from Vertice import Vertice
 
 
@@ -25,17 +26,65 @@ class Grafo:
         return self.vertices[v].rotulo
 
     # caso haja aresta entre os vértices, retorna True, senão, False
-    def haAresta(self, u: Vertice, v: Vertice) -> bool:
+    def haAresta(self, u: int, v: int) -> bool:
         # TODO: implementar
-        ...
+        if ((u, v) in self.arestas) or ((v, u) in self.arestas):
+            return True
+        return False
                     
-
     # retorna o peso caso exista a aresta, senão infinito (max. representavel)
-    def peso(self, u: Vertice, v: Vertice) -> int:
-        # TODO: implementar
-        ...
+    def peso(self, u: int, v: int) -> int|str:
+        if (u, v) in self.arestas:
+            return self.arestas[(u, v)].peso
+        if (v, u) in self.arestas:
+            return self.arestas[(v, u)].peso
+        
+        return "Sem aresta"
 
     # carrega grafo a partir de texto
     def ler(self, arquivo: str):
-        # TODO: implementar
-        ...
+        arquivo = open(arquivo, "r").read().split("\n")
+        
+        arestas = False
+        
+        for linha in arquivo:
+            # casos em que não faz nada
+            if linha == "" or "*vertices" in linha:
+                continue
+            # comeca a ler as arestas
+            elif ("*edges" in linha):
+                arestas = True
+                # continue
+            
+            # caso esteja lendo vertices
+            elif not arestas:
+                indice, rotulo = linha.split(" ")
+                indice = int(indice)
+                
+                vertice = Vertice(indice, rotulo)
+                self.vertices[indice] = vertice
+            
+            # lendo arestas
+            else:
+                valores = linha.split(" ")
+                u = self.vertices[int(valores[0])]
+                v = self.vertices[int(valores[1])]
+                peso = float(valores[2])
+                
+                aresta = Aresta(u, v, peso)
+                self.arestas[(u.indice, v.indice)] = aresta
+                
+                u.vizinhos.append(v)
+                v.vizinhos.append(u)
+                u.grau += 1
+                v.grau += 1
+                
+grafo = Grafo()
+grafo.ler("tests/jazz.net")
+# grafo.ler("tests/facebook_santiago.net")
+
+for key in grafo.vertices.keys():
+    print(f"{key}: {grafo.vertices[key].indice} - {grafo.vertices[key].rotulo}")
+    
+for key in grafo.arestas.keys():
+    print(f"{key}: {grafo.arestas[key].u.indice}, {grafo.arestas[key].v.indice}  - {grafo.arestas[key].peso}")
