@@ -58,7 +58,7 @@ class Grafo:
             
             # caso esteja lendo vertices
             elif not arestas:
-                indice, rotulo = linha.split(" ")
+                indice, rotulo = linha.split(" ",1)
                 indice = int(indice)
                 
                 vertice = Vertice(indice, rotulo)
@@ -66,7 +66,7 @@ class Grafo:
             
             # lendo arestas
             else:
-                valores = linha.split(" ")
+                valores = linha.split()
                 u = self.vertices[int(valores[0])]
                 v = self.vertices[int(valores[1])]
                 peso = float(valores[2])
@@ -80,11 +80,11 @@ class Grafo:
                 v.grau += 1
                 
 grafo = Grafo()
-grafo.ler("tests/jazz.net")
+grafo.ler("tests/facebook_santiago.net")
 # grafo.ler("tests/facebook_santiago.net")
 
 for key in grafo.vertices.keys():
     print(f"{key}: {grafo.vertices[key].indice} - {grafo.vertices[key].rotulo}")
     
-for key in grafo.arestas.keys():
-    print(f"{key}: {grafo.arestas[key].u.indice}, {grafo.arestas[key].v.indice}  - {grafo.arestas[key].peso}")
+# for key in grafo.arestas.keys():
+#     print(f"{key}: {grafo.arestas[key].u.indice}, {grafo.arestas[key].v.indice}  - {grafo.arestas[key].peso}")
