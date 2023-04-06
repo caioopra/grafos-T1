@@ -82,12 +82,3 @@ class Grafo:
                 v.vizinhos.append(u)
                 u.grau += 1
                 v.grau += 1
-                
-grafo = Grafo()
-grafo.ler("tests/facebook_santiago.net")
-
-for key in grafo.vertices.keys():
-    print(f"{key}: {grafo.vertices[key].indice} - {grafo.vertices[key].rotulo}")
-    
-# for key in grafo.arestas.keys():
-#     print(f"{key}: {grafo.arestas[key].u.indice}, {grafo.arestas[key].v.indice}  - {grafo.arestas[key].peso}")
