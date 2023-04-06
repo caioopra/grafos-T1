@@ -1,5 +1,6 @@
 from Aresta import Aresta
 from Vertice import Vertice
+from typing import List
 
 
 class Grafo:
@@ -24,6 +25,9 @@ class Grafo:
     # retorna o rotulo do vertice v
     def rotulo(self, v: int) -> str:
         return self.vertices[v].rotulo
+    
+    def vizinhos(self, v: int) -> List[Vertice]:
+        return self.vertices[v].vizinhos
 
     # caso haja aresta entre os vértices, retorna True, senão, False
     def haAresta(self, u: int, v: int) -> bool:
@@ -81,7 +85,6 @@ class Grafo:
                 
 grafo = Grafo()
 grafo.ler("tests/facebook_santiago.net")
-# grafo.ler("tests/facebook_santiago.net")
 
 for key in grafo.vertices.keys():
     print(f"{key}: {grafo.vertices[key].indice} - {grafo.vertices[key].rotulo}")
