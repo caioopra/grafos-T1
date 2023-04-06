@@ -11,8 +11,8 @@ grafo = Grafo()
 #     print(f"{key}: {grafo.arestas[key].u.indice}, {grafo.arestas[key].v.indice}  - {grafo.arestas[key].peso}")
 
 # TESTE DA QUESTAO 2
-grafo2 = Grafo()
-grafo2.ler("tests/adjnoun.net")
+# grafo2 = Grafo()
+# grafo2.ler("tests/adjnoun.net")
 # indice_vertice = int(input("Digite o indice do vertice s:"))
 
 # busca = BuscaEmLargura(grafo2, indice_vertice)
@@ -20,7 +20,7 @@ grafo2.ler("tests/adjnoun.net")
 
 #questao 3
 grafo2 = Grafo()
-grafo2.ler("tests/adjnoun.net")
+grafo2.ler("tests/test.net")
 
 ciclo = CicloEuleriano(grafo2)
-print(ciclo.has_eulerian_cycle())
+ciclo.print_eulerian()
