@@ -1,5 +1,6 @@
 from Grafo import Grafo
 from BuscaEmLargura import BuscaEmLargura
+from CicloEuleriano import CicloEuleriano
 grafo = Grafo()
 #grafo.ler("tests/facebook_santiago.net")
 
@@ -12,7 +13,14 @@ grafo = Grafo()
 # TESTE DA QUESTAO 2
 grafo2 = Grafo()
 grafo2.ler("tests/adjnoun.net")
-indice_vertice = int(input("Digite o indice do vertice s:"))
+# indice_vertice = int(input("Digite o indice do vertice s:"))
 
-busca = BuscaEmLargura(grafo2, indice_vertice)
-busca.run()
+# busca = BuscaEmLargura(grafo2, indice_vertice)
+# busca.run()
+
+#questao 3
+grafo2 = Grafo()
+grafo2.ler("tests/adjnoun.net")
+
+ciclo = CicloEuleriano(grafo2)
+print(ciclo.has_eulerian_cycle())
