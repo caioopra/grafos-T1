@@ -1,67 +1,93 @@
 from collections import defaultdict
 from Grafo import Grafo
-
+from copy  import copy
 class CicloEuleriano():
     def __init__(self, grafo: Grafo):
         self.grafo = grafo
-        self.stack = [list(self.grafo.vertices.keys())[0]]
-        self.visitados = defaultdict(bool)
 
-    def is_eulerian(self) -> bool:
+    def isEulerian(self) -> bool:
         for key in self.grafo.vertices:
             if self.grafo.vertices[key].grau % 2 != 0:
                 return False
         return True
 
-    def has_eulerian_cycle(self) -> bool:
-        if not self.is_eulerian():
-            return False
+    def hierholzer(self):
+        arestas_visitadas = {}  
+        arestas = list(self.grafo.arestas.values())
 
-        while self.stack:
-            vertice = self.stack.pop()
-            self.visitados[vertice] = True
-            for vizinho in self.grafo.vertices[vertice].vizinhos:
-                if not self.visitados[vizinho.indice]:
-                    self.stack.append(vizinho.indice)
+        for x in arestas:
+            arestas_visitadas[(x.u.indice, x.v.indice)] = False
 
-        for vertice in self.grafo.vertices.keys():
-            if not self.visitados[vertice]:
-                return False
+        v = list(self.grafo.vertices.values())[0].indice
+
+        r, ciclo = self.buscarSubcicloEuleriano(v, arestas_visitadas)    
+        if r == False:
+            return False, None
         
-        return True
+        else:
+            if False in arestas_visitadas.values():
+                return False, None
+            else:
+                return True, ciclo
 
-    def find_eulerian_cycle(self):
-        if not self.has_eulerian_cycle():
-            return 0
-
-        vertive_inicial = list(self.grafo.vertices.keys())[0]
-        ciclo = [vertive_inicial]
-
+    def buscarSubcicloEuleriano(self, v, arestas_visitadas):
+        ciclo = [v]
+        t = v
+        
         while True:
-            proximo_vertice = None
-            for vizinho in self.grafo.vertices[ciclo[-1]].vizinhos:
-                if vizinho.indice not in ciclo:
-                    proximo_vertice = vizinho.indice
+
+            if not False in arestas_visitadas.values():
+                return False, None
+            else:
+                nao_visitados = [k for k, i in arestas_visitadas.items() if i is False and v in k]
+                vertice = v
+                v = nao_visitados[0][0]
+                u = nao_visitados[0][1]
+                arestas_visitadas[(v, u)] = True
+                if u != vertice:
+                    v = u
+
+            
+                ciclo.append(v)
+
+            if v == t:
+                break
+
+        vertices_no_ciclo = [self.grafo.vertices[x] for x in ciclo]
+        vizinhos_abertos = []
+
+        for x in vertices_no_ciclo:
+            for y in x.vizinhos:
+                if (x.indice, y.indice) in arestas_visitadas:
+                    if arestas_visitadas[(x.indice, y.indice)] == False:
+                        vizinhos_abertos.append(x)
+
+                elif (y.indice, x.indice) in arestas_visitadas:
+                    if arestas_visitadas[(y.indice, x.indice)] == False:
+                        vizinhos_abertos.append(x)
+
+        if not vizinhos_abertos:
+            return True, ciclo
+
+        for x in vizinhos_abertos:
+            r, ciclo_2 = self.buscarSubcicloEuleriano(x.indice, arestas_visitadas)
+
+            for x in ciclo:
+                if x == ciclo_2[0]:
+                    index = ciclo.index(x)
+                    ciclo[index+1:index+1] = ciclo_2
+                    ciclo.pop(index)
                     break
-                elif (len(ciclo) == len(self.grafo.vertices)) and (vizinho.indice == ciclo[0]):
-                    ciclo.append(ciclo[0])
-                    return ciclo
+
+            return True, ciclo
 
 
-            if proximo_vertice is None:
-                if len(ciclo) == len(self.grafo.vertices):
-                    return ciclo
-                else:
-                    return None
-
-            index = ciclo.index(ciclo[-1])
-            ciclo = ciclo[:index+1] + [proximo_vertice] + ciclo[index+1:]
-
-    def print_eulerian(self):
-        if not self.has_eulerian_cycle():
+    def printEulerian(self):
+        if not self.isEulerian():
             print(0)
         else:
             print(1)
-            print(self.find_eulerian_cycle())
-
-
+            r, ciclo = self.hierholzer()
+            for x in range(len(ciclo)-1):
+                print(ciclo[x], end=',')
+            print(ciclo[-1])

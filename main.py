@@ -22,5 +22,6 @@ grafo = Grafo()
 grafo2 = Grafo()
 grafo2.ler("tests/test.net")
 
+
 ciclo = CicloEuleriano(grafo2)
-ciclo.print_eulerian()
+ciclo.printEulerian()
