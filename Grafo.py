@@ -1,6 +1,7 @@
 from Aresta import Aresta
 from Vertice import Vertice
-from typing import List
+
+from math import inf
 
 
 class Grafo:
@@ -25,8 +26,8 @@ class Grafo:
     # retorna o rotulo do vertice v
     def rotulo(self, v: int) -> str:
         return self.vertices[v].rotulo
-    
-    def vizinhos(self, v: int) -> List[Vertice]:
+
+    def vizinhos(self, v: int) -> list[int]:
         return self.vertices[v].vizinhos
 
     # caso haja aresta entre os vértices, retorna True, senão, False
@@ -35,49 +36,50 @@ class Grafo:
         if ((u, v) in self.arestas) or ((v, u) in self.arestas):
             return True
         return False
-                    
+
     # retorna o peso caso exista a aresta, senão infinito (max. representavel)
-    def peso(self, u: int, v: int) -> int|str:
+    # "inf" é float da biblioteca math
+    def peso(self, u: int, v: int) -> int:
         if (u, v) in self.arestas:
             return self.arestas[(u, v)].peso
         if (v, u) in self.arestas:
             return self.arestas[(v, u)].peso
-        
-        return "Sem aresta"
+
+        return inf
 
     # carrega grafo a partir de texto
     def ler(self, arquivo: str):
         arquivo = open(arquivo, "r").read().split("\n")
-        
+
         arestas = False
-        
+
         for linha in arquivo:
             # casos em que não faz nada
             if linha == "" or "*vertices" in linha:
                 continue
             # comeca a ler as arestas
-            elif ("*edges" in linha):
+            elif "*edges" in linha:
                 arestas = True
                 # continue
-            
+
             # caso esteja lendo vertices
             elif not arestas:
-                indice, rotulo = linha.split(" ",1)
+                indice, rotulo = linha.split(" ", 1)
                 indice = int(indice)
-                
+
                 vertice = Vertice(indice, rotulo)
                 self.vertices[indice] = vertice
-            
+
             # lendo arestas
             else:
                 valores = linha.split()
                 u = self.vertices[int(valores[0])]
                 v = self.vertices[int(valores[1])]
                 peso = float(valores[2])
-                
+
                 aresta = Aresta(u, v, peso)
                 self.arestas[(u.indice, v.indice)] = aresta
-                
+
                 u.vizinhos.append(v)
                 v.vizinhos.append(u)
                 u.grau += 1
