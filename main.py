@@ -1,6 +1,7 @@
 from Grafo import Grafo
 from BuscaEmLargura import BuscaEmLargura
 from CicloEuleriano import CicloEuleriano
+from FloydWarshall import FloydWarshall
 grafo = Grafo()
 #grafo.ler("tests/facebook_santiago.net")
 
@@ -23,5 +24,10 @@ grafo2 = Grafo()
 grafo2.ler("tests/test.net")
 
 
-ciclo = CicloEuleriano(grafo2)
-ciclo.printEulerian()
+#ciclo = CicloEuleriano(grafo2)
+#ciclo.printEulerian()
+
+#questao 5
+floyd = FloydWarshall(grafo2)
+
+floyd.run()
