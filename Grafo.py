@@ -32,7 +32,6 @@ class Grafo:
 
     # caso haja aresta entre os vértices, retorna True, senão, False
     def haAresta(self, u: int, v: int) -> bool:
-        # TODO: implementar
         if ((u, v) in self.arestas) or ((v, u) in self.arestas):
             return True
         return False
