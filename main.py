@@ -39,7 +39,9 @@ grafo = Grafo()
 # questao 4
 grafo4 = Grafo()
 grafo4.ler("tests/test.net")
-dijkstra = Dijkstra(grafo4, 4)
+# grafo4.ler("tests/adjnoun.net")
+
+dijkstra = Dijkstra(grafo4, 2)
 dijkstra.run()
 
 # ======================================
