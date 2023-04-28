@@ -28,8 +28,8 @@ grafo = Grafo()
 
 # ======================================
 # questao 3
-# grafo2 = Grafo()
-# grafo2.ler("tests/test.net")
+# grafo3 = Grafo()
+# grafo3.ler("tests/test.net")
 
 #ciclo = CicloEuleriano(grafo2)
 #ciclo.printEulerian()
@@ -37,19 +37,21 @@ grafo = Grafo()
 
 # ======================================
 # questao 4
-grafo4 = Grafo()
-grafo4.ler("tests/test.net")
+# grafo4 = Grafo()
+# grafo4.ler("tests/test.net")
 # grafo4.ler("tests/adjnoun.net")
 
-dijkstra = Dijkstra(grafo4, 2)
-dijkstra.run()
+# dijkstra = Dijkstra(grafo4, 2)
+# dijkstra.run()
 
 # ======================================
 
 
 # ======================================
 # questao 5
-# floyd = FloydWarshall(grafo2)
+# grafo5 = Grafo()
+# grafo5.ler("tests/adjnoun.net")
+# floyd = FloydWarshall(grafo5)
 
 # floyd.run()
 # ======================================
