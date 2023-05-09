@@ -1,6 +1,6 @@
 from queue import Queue
 from collections import defaultdict
-from Grafo import Grafo
+from Grafo.Grafo import Grafo
 
 class BuscaEmLargura():
     def __init__(self, grafo: Grafo, indice_vertice: int):

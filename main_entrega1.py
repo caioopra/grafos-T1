@@ -1,8 +1,8 @@
-from Grafo import Grafo
-from BuscaEmLargura import BuscaEmLargura
-from CicloEuleriano import CicloEuleriano
-from Dijkstra import Dijkstra
-from FloydWarshall import FloydWarshall
+from Grafo.Grafo import Grafo
+from atividade1.BuscaEmLargura import BuscaEmLargura
+from atividade1.CicloEuleriano import CicloEuleriano
+from atividade1.Dijkstra import Dijkstra
+from atividade1.FloydWarshall import FloydWarshall
 grafo = Grafo()
 
 # ======================================

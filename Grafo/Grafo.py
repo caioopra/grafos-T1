@@ -1,5 +1,5 @@
-from Aresta import Aresta
-from Vertice import Vertice
+from Grafo.Aresta import Aresta
+from Grafo.Vertice import Vertice
 
 from math import inf
 

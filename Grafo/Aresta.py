@@ -1,4 +1,4 @@
-from Vertice import Vertice
+from Grafo.Vertice import Vertice
 
 
 class Aresta:
