@@ -77,4 +77,4 @@ class Dijkstra:
                 if antecessor:
                     caminhos[key].insert(0, self.__antecessores[antecessor])
 
-        return caminhos
+        return caminhos 

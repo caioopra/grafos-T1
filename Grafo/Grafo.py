@@ -29,6 +29,12 @@ class Grafo:
 
     def vizinhos(self, v: int) -> list[int]:
         return self.vertices[v].vizinhos
+    
+    def vizinhos_saintes(self, v: int) -> list[int]:
+        return self.vertices[v].vizinhos_saintes
+    
+    def vizinhos_entrantes(self, u: int) -> list[int]:
+        return self.vertices[u].vizinhos_entrantes
 
     # caso haja aresta entre os vértices, retorna True, senão, False
     def haAresta(self, u: int, v: int) -> bool:
@@ -57,9 +63,8 @@ class Grafo:
             if linha == "" or "*vertices" in linha:
                 continue
             # comeca a ler as arestas
-            elif "*edges" in linha:
+            elif "*edges" in linha or "*arcs" in linha:
                 arestas = True
-                # continue
 
             # caso esteja lendo vertices
             elif not arestas:
@@ -80,6 +85,8 @@ class Grafo:
                 self.arestas[(u.indice, v.indice)] = aresta
 
                 u.vizinhos.append(v)
-                v.vizinhos.append(u)
+                u.vizinhos_saintes.append(v)
                 u.grau += 1
+                v.vizinhos.append(u)
+                v.vizinhos_entrantes.append(u)
                 v.grau += 1
