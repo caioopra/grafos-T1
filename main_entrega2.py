@@ -1,5 +1,6 @@
 from Grafo.Grafo import Grafo
 from atividade2.OrdencaoTopologica import OrdencaoTopologica
+from atividade2.Kruskal import Kruskal
 
 
 def test_2_ordTopologica():
@@ -13,8 +14,20 @@ def test_2_ordTopologica():
     ordenacao = OrdencaoTopologica(f"tests/dirigidos/{testes[2]}")
     ordenacao.run()
 
+
+def test_3_Kruskal():
+    testes = {
+        1: "agm_tiny.net",
+        2: "",
+    }
+
+    kruskal = Kruskal(f"tests/{testes[1]}")
+    kruskal.run()
+
+
 def main():
-    test_2_ordTopologica()
+    #test_2_ordTopologica()
+    test_3_Kruskal()
 
 
 if __name__ == "__main__":
