@@ -1,7 +1,18 @@
 from Grafo.Grafo import Grafo
 from atividade2.OrdencaoTopologica import OrdencaoTopologica
 from atividade2.Kruskal import Kruskal
+from atividade2.CompFortementeConexas import CompFortementeConexas
 
+
+
+def test_1_compFortementeConexa():
+    testes = {
+        1: "test.net",
+        2: ""
+    }
+
+    comp = CompFortementeConexas(f"tests/{testes[1]}")
+    comp.run()
 
 def test_2_ordTopologica():
     testes = {
@@ -26,8 +37,10 @@ def test_3_Kruskal():
 
 
 def main():
-    #test_2_ordTopologica()
-    test_3_Kruskal()
+    test_1_compFortementeConexa()
+    # test_2_ordTopologica()
+    # test_3_Kruskal()
+
 
 
 if __name__ == "__main__":

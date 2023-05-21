@@ -90,3 +90,11 @@ class Grafo:
                 v.vizinhos.append(u)
                 v.vizinhos_entrantes.append(u)
                 v.grau += 1
+
+    def transpose(self):
+
+        for v in self.vertices:
+            self.vertices[v].vizinhos_saintes, self.vertices[v].vizinhos_entrantes = self.vertices[v].vizinhos_entrantes, self.vertices[v].vizinhos_saintes
+        
+
+        
