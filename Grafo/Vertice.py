@@ -6,3 +6,4 @@ class Vertice:
         self.vizinhos_saintes = []     # (self, v)
         self.vizinhos_entrantes = []   # (u, self)
         self.grau = 0
+        self.cor = None
